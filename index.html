@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoadTube — Where STEM Creators Thrive | BlackRoad Media</title>
+<meta name="description" content="YouTube alternative for STEM educators. 90%+ creator revenue share. Voice-to-LaTeX. Automated Manim visualization. Zero transaction fees on educational content.">
+<meta name="theme-color" content="#FF2255">
+<meta property="og:title" content="RoadTube — Where STEM Creators Thrive">
+<meta property="og:description" content="90%+ revenue share. Voice-to-LaTeX. Auto-visualization. The video platform STEM deserves.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --gradient:linear-gradient(90deg,#FF6B2B,#FF2255,#CC00AA,#8844FF,#4488FF,#00D4FF);
+    --bg:#000;--surface:#0a0a0a;--card-border:#1a1a1a;
+    --text:#e0e0e0;--text-bright:#ffffff;--text-dim:#888;
+    --pink:#FF2255;--orange:#FF6B2B;--violet:#8844FF;--blue:#4488FF;--cyan:#00D4FF;--magenta:#CC00AA;
+    --green:#00ff88;
+    --font-heading:'Space Grotesk',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --font-body:'Space Grotesk',sans-serif;
+  }
+  html{scroll-behavior:smooth;font-size:16px}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.7;overflow-x:hidden}
+  a{color:var(--cyan);text-decoration:none;transition:color .2s}a:hover{color:var(--pink)}
+  h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--text-bright);line-height:1.2}
+  code,pre{font-family:var(--font-mono)}
+  .gradient-text{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .gradient-line{height:2px;background:var(--gradient);border:none;margin:2rem 0}
+  .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+  .section{padding:6rem 0}
+  .btn{display:inline-block;padding:.75rem 2rem;border-radius:8px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .3s;border:none;font-family:var(--font-heading)}
+  .btn-primary{background:var(--gradient);color:#000}
+  .btn-primary:hover{opacity:.9;transform:translateY(-1px);color:#000}
+  .btn-outline{border:1px solid var(--card-border);color:var(--text-bright);background:transparent}
+  .btn-outline:hover{border-color:var(--pink);color:var(--pink)}
+  .card{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:border-color .3s}
+  .card:hover{border-color:#333}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;background:rgba(0,0,0,.9);border-bottom:1px solid var(--card-border)}
+  nav .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+  nav .logo{font-family:var(--font-heading);font-weight:700;font-size:1.4rem;color:var(--text-bright)}
+  nav .logo span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  nav .nav-links{display:flex;gap:2rem;align-items:center}
+  nav .nav-links a{color:var(--text-dim);font-size:.9rem;font-weight:500}
+  nav .nav-links a:hover{color:var(--text-bright)}
+
+  .hero{padding:10rem 0 6rem;text-align:center;position:relative}
+  .hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(68,136,255,.06) 0%,transparent 70%);pointer-events:none}
+  .hero-badge{display:inline-block;padding:.4rem 1.2rem;border:1px solid var(--card-border);border-radius:100px;font-size:.8rem;color:var(--text-dim);margin-bottom:2rem;font-family:var(--font-mono)}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;margin-bottom:1.5rem;letter-spacing:-.02em}
+  .hero .subtitle{font-size:clamp(1.1rem,2.5vw,1.4rem);color:var(--text-dim);max-width:700px;margin:0 auto 3rem;line-height:1.6}
+  .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .hero-stats{display:flex;gap:3rem;justify-content:center;margin-top:4rem;flex-wrap:wrap}
+  .hero-stat .number{font-size:2.5rem;font-weight:700;font-family:var(--font-heading);background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero-stat .label{font-size:.85rem;color:var(--text-dim);margin-top:.3rem}
+
+  .section-header{text-align:center;margin-bottom:4rem}
+  .section-header h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem}
+  .section-header p{color:var(--text-dim);font-size:1.1rem;max-width:600px;margin:0 auto}
+  .section-tag{font-family:var(--font-mono);font-size:.8rem;color:var(--cyan);margin-bottom:.75rem;display:block}
+
+  .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-top:3rem}
+  .card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem}
+  .card h3{font-size:1.2rem;margin-bottom:.75rem}
+  .card p{color:var(--text-dim);font-size:.95rem;line-height:1.6}
+
+  /* REVENUE COMPARISON */
+  .revenue-compare{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:3rem}
+  .revenue-bar{margin-bottom:1.5rem}
+  .revenue-bar .bar-label{display:flex;justify-content:space-between;margin-bottom:.5rem;font-size:.9rem}
+  .revenue-bar .bar-label .platform{font-weight:500}
+  .revenue-bar .bar-label .pct{font-family:var(--font-mono);font-size:.85rem}
+  .bar-track{height:32px;background:#111;border-radius:8px;overflow:hidden;position:relative}
+  .bar-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding-left:1rem;font-family:var(--font-mono);font-size:.75rem;color:#000;font-weight:600}
+  .bar-creator{background:var(--gradient)}
+  .bar-youtube{background:linear-gradient(90deg,#ff4444,#cc0000)}
+  .bar-twitch{background:linear-gradient(90deg,#9146ff,#6441a5)}
+  .bar-tiktok{background:linear-gradient(90deg,#25f4ee,#fe2c55)}
+
+  /* VOICE TO LATEX */
+  .latex-demo{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:3rem;margin-top:3rem}
+  .latex-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+  .latex-header h3{font-size:1.2rem}
+  .latex-badge{font-family:var(--font-mono);font-size:.75rem;color:var(--green);border:1px solid rgba(0,255,136,.3);border-radius:4px;padding:.2rem .6rem}
+  .latex-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:1rem;align-items:center}
+  .latex-step{background:#0d0d0d;border:1px solid var(--card-border);border-radius:12px;padding:1.5rem;text-align:center}
+  .latex-step .step-label{font-family:var(--font-mono);font-size:.7rem;color:var(--text-dim);margin-bottom:.75rem}
+  .latex-step .step-content{font-size:.9rem;line-height:1.6}
+  .latex-arrow{color:var(--text-dim);font-size:1.5rem}
+
+  /* MANIM SECTION */
+  .manim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:3rem}
+  .manim-card{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;overflow:hidden}
+  .manim-preview{height:160px;background:#0d0d0d;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--text-dim);border-bottom:1px solid var(--card-border)}
+  .manim-info{padding:1.5rem}
+  .manim-info h4{font-size:.95rem;margin-bottom:.3rem}
+  .manim-info p{color:var(--text-dim);font-size:.8rem}
+  .manim-info .manim-tag{font-family:var(--font-mono);font-size:.7rem;color:var(--cyan);margin-top:.5rem;display:inline-block}
+
+  /* MARKET */
+  .market-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+  .market-stat{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:2.5rem;text-align:center}
+  .market-stat .ms-num{font-size:2.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+  .market-stat h4{margin:.75rem 0 .5rem}
+  .market-stat p{color:var(--text-dim);font-size:.85rem}
+
+  /* PRICING */
+  .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem}
+  .pricing-card{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:2.5rem;position:relative}
+  .pricing-card:hover{border-color:#333}
+  .pricing-card.featured{border-color:var(--pink)}
+  .pricing-card.featured::before{content:'FOR CREATORS';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gradient);color:#000;font-family:var(--font-mono);font-size:.7rem;font-weight:700;padding:.3rem 1rem;border-radius:100px}
+  .plan-name{font-family:var(--font-mono);font-size:.8rem;color:var(--text-dim);margin-bottom:.5rem}
+  .price{font-size:3rem;font-weight:700;margin-bottom:.5rem}
+  .price span{font-size:1rem;color:var(--text-dim);font-weight:400}
+  .plan-desc{color:var(--text-dim);font-size:.9rem;margin-bottom:2rem}
+  .pricing-features{list-style:none;margin-bottom:2rem}
+  .pricing-features li{padding:.5rem 0;font-size:.9rem;display:flex;align-items:center;gap:.75rem}
+  .pricing-features li::before{content:'\2713';color:var(--cyan);font-weight:700}
+
+  /* METRIC ROW */
+  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+  .metric-box{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:2rem;text-align:center}
+  .metric-box .metric-val{font-size:2rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .metric-box .metric-label{color:var(--text-dim);font-size:.8rem;margin-top:.5rem}
+
+  /* COMPARISON TABLE */
+  .comparison-table{width:100%;border-collapse:collapse;margin-top:3rem}
+  .comparison-table th,.comparison-table td{padding:1rem 1.5rem;text-align:left;border-bottom:1px solid var(--card-border);font-size:.9rem}
+  .comparison-table th{color:var(--text-bright);font-family:var(--font-heading);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+  .comparison-table td{color:var(--text-dim)}
+  .check{color:var(--cyan)}.cross{color:#ff4444}
+
+  .cta-section{text-align:center;padding:8rem 0}
+  .cta-section h2{font-size:clamp(2rem,4vw,3.5rem);margin-bottom:1.5rem}
+  .cta-section p{color:var(--text-dim);font-size:1.1rem;max-width:500px;margin:0 auto 2.5rem}
+
+  footer{border-top:1px solid var(--card-border);padding:4rem 0 2rem}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+  .footer-brand p{color:var(--text-dim);font-size:.85rem;line-height:1.6;max-width:300px;margin-top:1rem}
+  .footer-col h4{font-size:.85rem;color:var(--text-bright);margin-bottom:1rem;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em}
+  .footer-col a{display:block;color:var(--text-dim);font-size:.85rem;padding:.3rem 0}
+  .footer-col a:hover{color:var(--text-bright)}
+  .footer-bottom{border-top:1px solid var(--card-border);padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-bottom p{color:var(--text-dim);font-size:.8rem}
+  .footer-bottom .legal{display:flex;gap:1.5rem}
+  .footer-bottom .legal a{color:var(--text-dim);font-size:.8rem}
+
+  @media(max-width:768px){
+    nav .nav-links{display:none}
+    .revenue-compare{grid-template-columns:1fr}
+    .latex-flow{grid-template-columns:1fr;text-align:center}
+    .latex-arrow{transform:rotate(90deg)}
+    .market-stats{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .metric-row{grid-template-columns:1fr 1fr}
+    .section{padding:4rem 0}
+    .hero{padding:8rem 0 4rem}
+  }
+  @media(max-width:480px){.footer-grid{grid-template-columns:1fr}.metric-row{grid-template-columns:1fr}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .animate{animation:fadeInUp .6s ease forwards;opacity:0}
+  .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span>Road</span>Tube</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#revenue">Revenue</a>
+      <a href="#latex">Voice-to-LaTeX</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" class="btn btn-outline">Sign In</a>
+      <a href="#start" class="btn btn-primary">Start Creating</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="hero-badge">BlackRoad Media</span>
+    <h1 class="animate"><span class="gradient-text">Where STEM<br>Creators Thrive</span></h1>
+    <p class="subtitle animate delay-1">The video platform built for STEM educators. 90%+ revenue share (vs YouTube's 55%). Voice-to-LaTeX with 90%+ accuracy. Automated Manim-style visualization. Zero transaction fees on educational content.</p>
+    <div class="hero-actions animate delay-2">
+      <a href="#start" class="btn btn-primary">Apply for Creator Access</a>
+      <a href="#revenue" class="btn btn-outline">See the Numbers</a>
+    </div>
+    <div class="hero-stats animate delay-3">
+      <div class="hero-stat">
+        <div class="number">90%+</div>
+        <div class="label">Creator Revenue Share</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">90%+</div>
+        <div class="label">LaTeX Accuracy</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">$0</div>
+        <div class="label">Edu Content Fees</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">$269B</div>
+        <div class="label">Market (eLearning)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="gradient-line">
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// BUILT FOR STEM</span>
+      <h2>Tools YouTube <span class="gradient-text">Never Built</span></h2>
+      <p>Every feature designed for educators who explain complex ideas with math, code, and diagrams.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="card animate">
+        <div class="card-icon" style="background:rgba(255,34,85,.1);color:var(--pink)">&#8721;</div>
+        <h3>Voice-to-LaTeX</h3>
+        <p>Speak equations naturally. "Integral from 0 to infinity of e to the negative x squared dx" becomes perfectly rendered LaTeX in real-time. 90%+ accuracy on first pass. Edit inline.</p>
+      </div>
+      <div class="card animate delay-1">
+        <div class="card-icon" style="background:rgba(0,212,255,.1);color:var(--cyan)">&#9654;</div>
+        <h3>Auto-Visualization</h3>
+        <p>Describe a concept and RoadTube generates Manim-style animations automatically. Graphs, transforms, vector fields, 3D surfaces. From description to visual in seconds.</p>
+      </div>
+      <div class="card animate delay-2">
+        <div class="card-icon" style="background:rgba(136,68,255,.1);color:var(--violet)">&#128176;</div>
+        <h3>90%+ Revenue Share</h3>
+        <p>YouTube takes 45%. We take less than 10%. STEM creators keep the vast majority of what they earn. Direct payouts, transparent reporting, no mysterious demonetization.</p>
+      </div>
+      <div class="card animate delay-3">
+        <div class="card-icon" style="background:rgba(255,107,43,.1);color:var(--orange)">&#128187;</div>
+        <h3>Interactive Code Blocks</h3>
+        <p>Embed runnable code in videos. Viewers can pause, edit, and execute code snippets without leaving the player. Python, JS, Rust, Go. Sandboxed and safe.</p>
+      </div>
+      <div class="card animate">
+        <div class="card-icon" style="background:rgba(204,0,170,.1);color:var(--magenta)">&#128209;</div>
+        <h3>Chapter + Problem Sets</h3>
+        <p>Structured content with auto-generated chapters, embedded quizzes, and practice problems. Viewers don't just watch — they solve. Spaced repetition built in.</p>
+      </div>
+      <div class="card animate delay-1">
+        <div class="card-icon" style="background:rgba(68,136,255,.1);color:var(--blue)">&#128301;</div>
+        <h3>STEM Discovery</h3>
+        <p>Content surfaced by topic taxonomy, not engagement metrics. Find videos on "Fourier transforms" or "quantum entanglement," not "SHOCKING math trick." Subject-first, not clickbait-first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border)" id="revenue">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// CREATOR ECONOMICS</span>
+      <h2>Keep What You <span class="gradient-text">Earn</span></h2>
+      <p>Side-by-side: what creators actually take home.</p>
+    </div>
+    <div class="revenue-compare">
+      <div>
+        <div class="revenue-bar">
+          <div class="bar-label"><span class="platform" style="color:var(--text-bright)">RoadTube</span><span class="pct" style="color:var(--cyan)">90%+ to creator</span></div>
+          <div class="bar-track"><div class="bar-fill bar-creator" style="width:92%">$920 of $1,000</div></div>
+        </div>
+        <div class="revenue-bar">
+          <div class="bar-label"><span class="platform">YouTube</span><span class="pct">55% to creator</span></div>
+          <div class="bar-track"><div class="bar-fill bar-youtube" style="width:55%">$550 of $1,000</div></div>
+        </div>
+        <div class="revenue-bar">
+          <div class="bar-label"><span class="platform">Twitch</span><span class="pct">50% to creator</span></div>
+          <div class="bar-track"><div class="bar-fill bar-twitch" style="width:50%">$500 of $1,000</div></div>
+        </div>
+        <div class="revenue-bar">
+          <div class="bar-label"><span class="platform">TikTok</span><span class="pct">~20% (Creator Fund)</span></div>
+          <div class="bar-track"><div class="bar-fill bar-tiktok" style="width:20%">$200 of $1,000</div></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:1.5rem">The Math Is Simple</h3>
+        <div class="card" style="margin-bottom:1rem">
+          <h4>Zero Fees on Educational Content</h4>
+          <p>Free educational videos generate zero platform fees. We monetize through premium tools, not by taxing education. Teaching should never have a platform tax.</p>
+        </div>
+        <div class="card" style="margin-bottom:1rem">
+          <h4>Transparent Reporting</h4>
+          <p>See exactly where every dollar comes from. No "estimated revenue" that changes retroactively. Real numbers, real-time, no surprises.</p>
+        </div>
+        <div class="card">
+          <h4>No Demonetization Roulette</h4>
+          <p>No automated systems flagging your quantum mechanics video because it mentions "nuclear." STEM content is safe by default. Human review only.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="latex">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// VOICE-TO-LATEX</span>
+      <h2>Speak Math. <span class="gradient-text">See Math.</span></h2>
+      <p>90%+ accuracy on mathematical speech-to-LaTeX conversion.</p>
+    </div>
+    <div class="latex-demo">
+      <div class="latex-header">
+        <h3>Live Conversion Demo</h3>
+        <span class="latex-badge">90%+ ACCURACY</span>
+      </div>
+      <div class="latex-flow">
+        <div class="latex-step">
+          <div class="step-label">VOICE INPUT</div>
+          <div class="step-content" style="font-style:italic;color:var(--text-dim)">"The integral from zero to infinity of e to the negative x squared dx equals the square root of pi over two"</div>
+        </div>
+        <div class="latex-arrow">&#8594;</div>
+        <div class="latex-step">
+          <div class="step-label">GENERATED LATEX</div>
+          <div class="step-content" style="font-family:var(--font-mono);font-size:.85rem;color:var(--cyan)">\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}</div>
+        </div>
+        <div class="latex-arrow">&#8594;</div>
+        <div class="latex-step">
+          <div class="step-label">RENDERED OUTPUT</div>
+          <div class="step-content" style="font-size:1.5rem;color:var(--text-bright);font-family:serif;font-style:italic">&#8747; e<sup>-x&sup2;</sup> dx = &radic;&pi; / 2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-box">
+        <div class="metric-val">90%+</div>
+        <div class="metric-label">First-Pass Accuracy</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">&lt;500ms</div>
+        <div class="metric-label">Conversion Latency</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">Local</div>
+        <div class="metric-label">On-Device Inference</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">50+</div>
+        <div class="metric-label">Math Domains</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border)" id="manim">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// AUTO-VISUALIZATION</span>
+      <h2>Describe It. <span class="gradient-text">See It.</span></h2>
+      <p>Manim-style animations generated from natural language descriptions.</p>
+    </div>
+    <div class="manim-grid">
+      <div class="manim-card">
+        <div class="manim-preview">&#128200;</div>
+        <div class="manim-info">
+          <h4>Function Plots</h4>
+          <p>"Plot sin(x) and cos(x) from 0 to 2pi with animated trace"</p>
+          <span class="manim-tag">CALCULUS</span>
+        </div>
+      </div>
+      <div class="manim-card">
+        <div class="manim-preview">&#128302;</div>
+        <div class="manim-info">
+          <h4>3D Surfaces</h4>
+          <p>"Show the saddle point of f(x,y) = x^2 - y^2 rotating slowly"</p>
+          <span class="manim-tag">MULTIVARIABLE</span>
+        </div>
+      </div>
+      <div class="manim-card">
+        <div class="manim-preview">&#128296;</div>
+        <div class="manim-info">
+          <h4>Matrix Transforms</h4>
+          <p>"Animate a 2x2 rotation matrix applied to unit square"</p>
+          <span class="manim-tag">LINEAR ALGEBRA</span>
+        </div>
+      </div>
+      <div class="manim-card">
+        <div class="manim-preview">&#9881;</div>
+        <div class="manim-info">
+          <h4>Algorithm Viz</h4>
+          <p>"Step through merge sort on [38,27,43,3,9,82,10]"</p>
+          <span class="manim-tag">CS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="market">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// MARKET OPPORTUNITY</span>
+      <h2>A <span class="gradient-text">$269B Market</span></h2>
+      <p>Corporate eLearning alone is $269.78B. Phase 1: STEM exclusive.</p>
+    </div>
+    <div class="market-stats">
+      <div class="market-stat">
+        <div class="ms-num">$269.78B</div>
+        <h4>Corporate eLearning</h4>
+        <p>Global corporate e-learning market size and growing 14% annually.</p>
+      </div>
+      <div class="market-stat">
+        <div class="ms-num">$8.5B</div>
+        <h4>STEM EdTech</h4>
+        <p>STEM-focused educational technology market, our initial beachhead.</p>
+      </div>
+      <div class="market-stat">
+        <div class="ms-num">2.7M</div>
+        <h4>STEM YouTubers</h4>
+        <p>Estimated STEM content creators on YouTube, underserved by current tools.</p>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;margin-top:4rem">
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Feature</th><th>RoadTube</th><th>YouTube</th><th>Nebula</th><th>Coursera</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Creator Revenue Share</td><td class="check" style="color:var(--cyan)">90%+</td><td>55%</td><td>50% (est.)</td><td>15-40%</td></tr>
+          <tr><td>Voice-to-LaTeX</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td></tr>
+          <tr><td>Auto-Visualization</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td></tr>
+          <tr><td>Interactive Code</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td><td class="check">&#10003;</td></tr>
+          <tr><td>STEM-First Discovery</td><td class="check">&#10003;</td><td class="cross">Engagement-first</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Zero Edu Content Fee</td><td class="check">&#10003;</td><td class="cross">Ads</td><td class="cross">Subscription</td><td class="cross">Per-course</td></tr>
+          <tr><td>No Demonetization</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="check">&#10003;</td><td class="check">N/A</td></tr>
+          <tr><td>Embedded Quizzes</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td><td class="check">&#10003;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// PRICING</span>
+      <h2>Free to Watch. <span class="gradient-text">Free to Teach.</span></h2>
+      <p>Educational content is always free. Premium tools for creators who want more.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">VIEWER</div>
+        <div class="price">Free</div>
+        <div class="plan-desc">Watch, learn, practice. No ads on educational content.</div>
+        <ul class="pricing-features">
+          <li>Unlimited STEM video access</li>
+          <li>Interactive code execution</li>
+          <li>Practice problems</li>
+          <li>STEM topic discovery</li>
+          <li>No ads on edu content</li>
+          <li>Bookmarks and playlists</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="width:100%;text-align:center">Start Watching</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="plan-name">CREATOR</div>
+        <div class="price">$0<span> (90/10 split)</span></div>
+        <div class="plan-desc">Upload, earn, grow. 90%+ of everything you make.</div>
+        <ul class="pricing-features">
+          <li>Unlimited uploads</li>
+          <li>Voice-to-LaTeX (basic)</li>
+          <li>Auto-visualization (5/mo)</li>
+          <li>Revenue dashboard</li>
+          <li>90%+ revenue share</li>
+          <li>Channel analytics</li>
+          <li>Chapter auto-generation</li>
+          <li>Embedded quizzes</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="width:100%;text-align:center">Apply as Creator</a>
+      </div>
+      <div class="pricing-card">
+        <div class="plan-name">CREATOR PRO</div>
+        <div class="price">$29<span>/mo</span></div>
+        <div class="plan-desc">Unlimited AI tools. Priority rendering. API access.</div>
+        <ul class="pricing-features">
+          <li>Everything in Creator</li>
+          <li>Unlimited auto-visualization</li>
+          <li>Priority video encoding</li>
+          <li>Advanced analytics</li>
+          <li>API access</li>
+          <li>Custom branding</li>
+          <li>Collaboration tools</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="width:100%;text-align:center">Go Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="start">
+  <div class="container">
+    <h2>STEM Creators <span class="gradient-text">Deserve Better</span></h2>
+    <p>Apply for early creator access. We're starting with STEM. We're starting with you.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="#" class="btn btn-primary">Apply for Creator Access</a>
+      <a href="#" class="btn btn-outline">Watch Demo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="font-family:var(--font-heading);font-weight:700;font-size:1.2rem;color:var(--text-bright)"><span class="gradient-text">RoadTube</span></div>
+        <p>Where STEM creators thrive. Built by BlackRoad Media. 90%+ revenue share, voice-to-LaTeX, auto-visualization.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#revenue">Revenue Share</a>
+        <a href="#latex">Voice-to-LaTeX</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Creators</h4>
+        <a href="#">Creator Guide</a>
+        <a href="#">Analytics Docs</a>
+        <a href="#">API Reference</a>
+        <a href="#">Community</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="https://blackroad.io">BlackRoad OS, Inc.</a>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>BlackRoad OS, Inc. All rights reserved. Proprietary license.</p>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Creator Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){entry.target.style.animationPlayState='running';observer.unobserve(entry.target)}
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.animate').forEach(function(el){el.style.animationPlayState='paused';observer.observe(el)});
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(this.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+    });
+  });
+});
+</script>
+</body>
+</html>
